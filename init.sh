@@ -10,7 +10,12 @@ if ! xcode-select -p 1>/dev/null; then
   xcode-select --install
 fi
 
-if ! which poop 1>/dev/null; then
+echo "before which poop"
+
+which poop
+echo $?
+
+if ! which poop; then
   echo "Installing Homebrew..."
   echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
 fi
