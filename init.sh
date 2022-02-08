@@ -2,10 +2,14 @@
 
 set -eo pipefail
 
+NVM_VERSION=0.39.1
+
 echo "Create folders"
-mkdir -p $HOME/dev
-mkdir -p $HOME/.config/zsh
-mkdir -p $HOME/bin
+mkdir -p ~/dev
+mkdir -p ~/.config/zsh/plugins
+mkdir -p ~/bin
+
+DEV=~/dev
 
 if ! xcode-select -p 1>/dev/null; then
   echo "Installing xcode command line tools..."
@@ -16,13 +20,15 @@ fi
 export ZDOTDIR=~/.config/zsh
 
 # clone the dotfiles repo
-if [[ ! -d $ZDOTDIR/.git ]]; then
-  git clone --recursive git@github.com:BeyondEvil/dotfiles.git $ZDOTDIR
+if [[ ! -d $DEV/dotfiles/.git ]]; then
+  git clone --recursive git@github.com:BeyondEvil/dotfiles.git $DEV/dotfiles
 else
-  pushd $ZDOTDIR
+  pushd $DEV/dotfiles
   git pull
   popd
 if
+
+cp $DEV/dotfiles/.z* $ZDOTDIR
 
 # change the root .zshenv file to use ZDOTDIR
 cat << 'EOF' >| ~/.zshenv
@@ -33,6 +39,17 @@ EOF
 if ! which brew 1>/dev/null; then
   echo "Installing Homebrew..."
   echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+fi
+
+if ! nvm &>/dev/null; then
+  echo "Installing NVM..."
+  curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh | bash
+fi
+
+# zsh -c "nvm install --lts && nvm alias default $(node --version)"
+
+if [[ ! -d $ZDOTDIR/plugins/zsh-syntax-hightlighting/.git ]]; then
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZDOTDIR/plugins/zsh-syntax-hightlighting
 fi
 
 brew update
@@ -47,6 +64,7 @@ jsonnet
 kubectl
 kubectx
 openssl
+pure
 pyenv
 readline
 shellcheck
