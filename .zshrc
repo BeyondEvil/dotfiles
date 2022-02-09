@@ -11,10 +11,9 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
-export NVM_DIR=~/.nvm
-[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
-echo 'eval "$(pyenv init -)"'
+eval "$(pyenv init -)"
 
 # case-insensitivity
 autoload -U compinit && compinit
