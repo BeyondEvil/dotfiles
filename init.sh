@@ -11,10 +11,10 @@ mkdir -p ~/bin
 
 DEV=~/dev
 
-#if ! xcode-select -p 1>/dev/null; then
-#  echo "Installing xcode command line tools..."
-#  xcode-select --install
-#fi
+if ! xcode-select -p 1>/dev/null; then
+  echo "Installing xcode command line tools..."
+  xcode-select --install
+fi
 #
 ## set the amazing ZDOTDIR variable
 #export ZDOTDIR=~/.config/zsh
