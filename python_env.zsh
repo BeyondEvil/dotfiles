@@ -22,7 +22,7 @@ echo "os PATH: $PATH"
 
 # echo "pipx ensurepath"
 echo "Install pipx"
-brew install pipx
+brew install --ignore-dependencies pipx
 # pipx ensurepath
 
 
