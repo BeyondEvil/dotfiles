@@ -69,13 +69,13 @@ fi
 brew update && brew upgrade
 
 formulae="
-awscli
 go
 jq
 jsonnet
 kubectl
 kubectx
 openssl
+pipx
 pure
 pyenv
 readline
@@ -107,5 +107,8 @@ brew install --cask $casks 2>/dev/null
 
 echo "Cleaning up"
 brew cleanup
+
+echo "Setting up python env"
+/bin/zsh $DEV/dotfiles/python_env.zsh
 
 echo "Done"
