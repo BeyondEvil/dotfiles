@@ -26,7 +26,7 @@ if [[ ! -d $DEV/dotfiles/.git ]]; then
 else
   echo "Updating dotfiles"
   pushd $DEV/dotfiles
-  git pull
+  git pull --ff-only
   popd
 fi
 
@@ -62,7 +62,7 @@ if [[ ! -d $zsh_highlight_dir/.git ]]; then
 else
   echo "Updating zsh syntax highlighting"
   pushd $zsh_highlight_dir
-  git pull
+  git pull --ff-only
   popd
 fi
 
