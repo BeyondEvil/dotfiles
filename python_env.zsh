@@ -1,7 +1,7 @@
 [[ -o login ]] && echo "Login" || echo "Non-Login"
 
 echo "Install python 3.9"
-pyenv install 3.9.10
+pyenv install 3.9.10 2>/dev/null || true
 
 echo "Set python 3.9 as global"
 pyenv global 3.9.10
@@ -20,12 +20,12 @@ python --version
 echo "zsh path: $path"
 echo "os PATH: $PATH"
 
-echo "pipx ensurepath"
+# echo "pipx ensurepath"
 # brew install pipx
 # pipx ensurepath
 
 
-echo "restart the shell"
+# echo "restart the shell"
 # exec zsh -l
 
 # echo "pipx version"

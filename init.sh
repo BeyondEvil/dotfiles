@@ -108,6 +108,6 @@ echo "Cleaning up"
 brew cleanup
 
 echo "Setting up python env"
-/bin/zsh $DEV/dotfiles/python_env.zsh
+/bin/zsh -l $DEV/dotfiles/python_env.zsh
 
 echo "Done"
