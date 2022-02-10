@@ -1,7 +1,7 @@
 [[ -o login ]] && echo "Login" || echo "Non-Login"
 
 echo "Install python 3.9"
-pyenv install 3.9.10 2>/dev/null || true
+pyenv install --skip-existing 3.9.10
 
 echo "Set python 3.9 as global"
 pyenv global 3.9.10
