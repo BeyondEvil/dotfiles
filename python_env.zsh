@@ -1,3 +1,5 @@
+[[ -o login ]] && echo "Login" || echo "Non-Login"
+
 echo "Install python 3.9"
 pyenv install 3.9.10
 
