@@ -1,5 +1,3 @@
-eval "$(pyenv init --path)"
-
 export DEV=~/dev
 
 export NVM_DIR=~/.nvm 
@@ -10,3 +8,5 @@ path=(
   /opt/homebrew/{bin,sbin}
   $path
 )
+
+eval "$(pyenv init --path)"
