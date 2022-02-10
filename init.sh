@@ -9,7 +9,9 @@ mkdir -p ~/dev
 mkdir -p ~/.config/zsh/plugins
 mkdir -p ~/bin
 
-DEV=~/dev
+export DEV=~/dev
+
+echo "WHAT IS DEV: ${DEV}"
 
 if ! xcode-select -p 1>/dev/null; then
   echo "Installing xcode command line tools..."
@@ -25,7 +27,7 @@ echo "CLONE DOTFILES"
 # clone the dotfiles repo
 if [[ ! -d $DEV/dotfiles/.git ]]; then
   echo "CLONING"
-  git clone --recursive git@github.com:BeyondEvil/dotfiles.git $DEV/dotfiles
+  git clone --recursive https://github.com/BeyondEvil/dotfiles.git $DEV/dotfiles
 else
   echo "PULLING"
   pushd $DEV/dotfiles
