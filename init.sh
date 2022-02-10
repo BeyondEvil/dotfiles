@@ -65,7 +65,7 @@ fi
 
 echo "INSTALL ZSH SYNTAX HIGHLIGHTING"
 if [[ ! -d $ZDOTDIR/plugins/zsh-syntax-hightlighting/.git ]]; then
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZDOTDIR/plugins/zsh-syntax-hightlighting
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZDOTDIR/plugins/zsh-syntax-highlighting
 fi
 
 echo "BREW UPDATE"
