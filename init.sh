@@ -75,7 +75,6 @@ jsonnet
 kubectl
 kubectx
 openssl
-pipx
 pure
 pyenv
 readline

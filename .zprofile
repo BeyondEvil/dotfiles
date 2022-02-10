@@ -5,6 +5,7 @@ export NVM_DIR=~/.nvm
 
 path=(
   ~/bin
+  ~/.local/bin
   /opt/homebrew/{bin,sbin}
   $path
 )
