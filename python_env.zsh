@@ -21,15 +21,16 @@ echo "zsh path: $path"
 echo "os PATH: $PATH"
 
 # echo "pipx ensurepath"
-# brew install pipx
+echo "Install pipx"
+brew install pipx
 # pipx ensurepath
 
 
 # echo "restart the shell"
 # exec zsh -l
 
-# echo "pipx version"
-# pipx --version
+echo "pipx version"
+pipx --version
 
 # echo "Install awscli"
 # pipx install awscli
