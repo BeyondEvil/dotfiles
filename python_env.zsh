@@ -9,22 +9,28 @@ pyenv versions
 
 echo "Which python"
 whence -p python
+python --version
 
 echo "Which python3"
 whence -p python3
+python --version
+
+echo "zsh path: $path"
+echo "os PATH: $PATH"
 
 echo "pipx ensurepath"
-brew install pipx
+# brew install pipx
 # pipx ensurepath
+
 
 echo "restart the shell"
 # exec zsh -l
 
-echo "pipx version"
-pipx --version
+# echo "pipx version"
+# pipx --version
 
-echo "Install awscli"
-pipx install awscli
+# echo "Install awscli"
+# pipx install awscli
 
-echo "AWS version"
-aws --version
+# echo "AWS version"
+# aws --version
