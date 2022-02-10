@@ -56,7 +56,7 @@ echo "EVAL BREW"
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 echo "INSTALL NVM"
-if ! nvm &>/dev/null; then
+if [[ ! -d ~/.nvm ]]; then
   echo "Installing NVM..."
   curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v${NVM_VERSION}/install.sh | bash
 fi
@@ -64,7 +64,7 @@ fi
 # zsh -c "nvm install --lts && nvm alias default $(node --version)"
 
 echo "INSTALL ZSH SYNTAX HIGHLIGHTING"
-if [[ ! -d $ZDOTDIR/plugins/zsh-syntax-hightlighting/.git ]]; then
+if [[ ! -d $ZDOTDIR/plugins/zsh-syntax-highlighting/.git ]]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $ZDOTDIR/plugins/zsh-syntax-highlighting
 fi
 
