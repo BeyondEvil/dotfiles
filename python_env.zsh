@@ -17,12 +17,21 @@ echo "Which python3"
 whence -p python3
 python --version
 
+echo "pip version before"
+pip --version
+
+echo "Update pip"
+python -m pip install --upgrade pip
+
+echo "pip version after"
+pip --version
+
 echo "zsh path: $path"
 echo "os PATH: $PATH"
 
 # echo "pipx ensurepath"
 echo "Install pipx"
-python -m pip install --user pipx
+python -m pip install --user --upgrade pipx
 # brew install --ignore-dependencies pipx
 # pipx ensurepath
 
@@ -34,7 +43,7 @@ echo "pipx version"
 pipx --version
 
 # echo "Install awscli"
-# pipx install awscli
+pipx install awscli
 
 # echo "AWS version"
-# aws --version
+aws --version
