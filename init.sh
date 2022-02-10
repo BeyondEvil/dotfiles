@@ -25,9 +25,9 @@ if [[ ! -d $DEV/dotfiles/.git ]]; then
   git clone --recursive https://github.com/BeyondEvil/dotfiles.git $DEV/dotfiles
 else
   echo "Updating dotfiles"
-  pushd $DEV/dotfiles
+  pushd $DEV/dotfiles 1>/dev/null || exit 1
   git pull --ff-only
-  popd
+  popd 1>/dev/null || exit 1
 fi
 
 echo "Copying dotfiles to ZDOTDIR"
@@ -61,9 +61,9 @@ if [[ ! -d $zsh_highlight_dir/.git ]]; then
   git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $zsh_highlight_dir
 else
   echo "Updating zsh syntax highlighting"
-  pushd $zsh_highlight_dir
+  pushd $zsh_highlight_dir 1>/dev/null || exit 1
   git pull --ff-only
-  popd
+  popd 1>/dev/null || exit 1
 fi
 
 brew update && brew upgrade
@@ -87,7 +87,7 @@ xz
 zlib
 "
 
-echo "Installing formulae..."
+echo "Installing formulae"
 brew install $formulae 2>/dev/null
 
 casks="
@@ -102,10 +102,10 @@ pycharm
 slack
 "
 
-echo "Installing casks..."
+echo "Installing casks"
 brew install --cask $casks 2>/dev/null
 
-echo "Cleaning up..."
+echo "Cleaning up"
 brew cleanup
 
 echo "Done"
