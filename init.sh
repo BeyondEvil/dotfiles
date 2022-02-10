@@ -33,7 +33,7 @@ else
   pushd $DEV/dotfiles
   git pull
   popd
-if
+fi
 
 echo "COPY DOTFILES"
 cp $DEV/dotfiles/.z* $ZDOTDIR
