@@ -72,6 +72,7 @@ else
   popd 1>/dev/null || exit 1
 fi
 
+brew tap hashicorp/tap
 brew update && brew upgrade
 
 formulae="
@@ -90,6 +91,7 @@ sqlite3
 wget
 xz
 zlib
+hashicorp/tap/terraform
 "
 
 echo "Installing formulae"
