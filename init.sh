@@ -118,7 +118,7 @@ echo "Setting up python env"
 
 if ! which aws 1>/dev/null; then
   echo "Installing AWS CLI"
-  curl "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+  curl -fsSL "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
   installer -pkg AWSCLIV2.pkg \
     -target CurrentUserHomeDirectory \
     -applyChoiceChangesXML $DEV/dotfiles/awscli.xml
