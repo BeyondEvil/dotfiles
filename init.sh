@@ -16,6 +16,12 @@ if ! xcode-select -p 1>/dev/null; then
   xcode-select --install
 fi
 
+if ! /usr/bin/pgrep oahd &>/dev/null; then
+  echo "Installing Rosetta 2"
+  # needed for AWS CLI 2
+  /usr/sbin/softwareupdate --install-rosetta --agree-to-license
+fi
+
 # set the amazing ZDOTDIR variable
 export ZDOTDIR=~/.config/zsh
 
