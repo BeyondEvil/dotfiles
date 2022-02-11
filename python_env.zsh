@@ -10,5 +10,7 @@ python -m pip install --upgrade pip
 echo "Install pipx"
 python -m pip install --user --upgrade pipx
 
-echo "Install poetry"
-curl -sSL https://install.python-poetry.org | python -
+if ! whence -p poetry &>/dev/null; then 
+  echo "Install poetry"
+  curl -sSL https://install.python-poetry.org | python -
+fi
