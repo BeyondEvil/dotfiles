@@ -14,8 +14,6 @@ export DEV=~/dev
 if ! xcode-select -p 1>/dev/null; then
   echo "Installing xcode command line tools"
   xcode-select --install
-else
-  /usr/sbin/softwareupdate --all --install --force
 fi
 
 if ! /usr/bin/pgrep oahd &>/dev/null; then
