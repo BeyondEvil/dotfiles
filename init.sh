@@ -2,6 +2,22 @@
 
 set -eo pipefail
 
+get() {
+  local plugin="${1}"
+  local name=$(basename -s .git "${plugin}")
+
+  local install_dir=$ZDOTDIR/plugins/${name}
+  if [[ ! -d ${install_dir}/.git ]]; then
+    echo "Installing zsh plugin ${name}"
+    git clone "${plugin}" "${install_dir}"
+  else
+    echo "Updating zsh plugin ${name}"
+    pushd "${install_dir}" 1>/dev/null || exit 1
+    git pull --ff-only
+    popd 1>/dev/null || exit 1
+  fi
+}
+
 NVM_VERSION=0.39.1
 
 echo "Creating folders"
@@ -39,6 +55,8 @@ fi
 echo "Copying dotfiles to ZDOTDIR"
 cp $DEV/dotfiles/.z* $ZDOTDIR
 
+cp $DEV/dotfiles/starship.toml ~/.config/
+
 # change the root .zshenv file to use ZDOTDIR
 if [[ -s ~/.zshenv ]]; then
 cat << 'EOF' >| ~/.zshenv
@@ -61,21 +79,21 @@ fi
 
 # zsh -c "nvm install --lts && nvm alias default $(node --version)"
 
-zsh_highlight_dir=$ZDOTDIR/plugins/zsh-syntax-highlighting
-if [[ ! -d $zsh_highlight_dir/.git ]]; then
-  echo "Installing zsh syntax highlighting"
-  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git $zsh_highlight_dir
-else
-  echo "Updating zsh syntax highlighting"
-  pushd $zsh_highlight_dir 1>/dev/null || exit 1
-  git pull --ff-only
-  popd 1>/dev/null || exit 1
-fi
+# Install zsh plugins
+IFS=$'\n' read -r -d '' -a plugins << 'END'
+https://github.com/zsh-users/zsh-syntax-highlighting.git
+https://github.com/zsh-users/zsh-autosuggestions.git
+https://github.com/zsh-users/zsh-completions.git
+END
+
+for plugin in "${plugins[@]}"; do
+  get "${plugin}"
+done
 
 brew tap homebrew/cask-fonts
 brew update && brew upgrade
 
-formulae="
+IFS=$'\n' read -r -d '' -a formulae << 'END'
 go
 jq
 jsonnet
@@ -92,12 +110,12 @@ sqlite3
 wget
 xz
 zlib
-"
+END
 
 echo "Installing formulae"
-brew install $formulae 2>/dev/null
+brew install "${formulae[@]}" 2>/dev/null
 
-casks="
+IFS=$'\n' read -r -d '' -a casks << 'END'
 1password
 bitwarden
 brave-browser
@@ -108,10 +126,10 @@ intellij-idea
 iterm2
 pycharm
 slack
-"
+END
 
 echo "Installing casks"
-brew install --cask $casks 2>/dev/null
+brew install --cask "${casks[@]}" 2>/dev/null
 
 echo "Cleaning up"
 brew cleanup

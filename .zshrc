@@ -10,6 +10,10 @@ setopt hist_save_no_dups
 setopt hist_ignore_dups
 setopt hist_find_no_dups
 
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+export PYTHONDONTWRITEBYTECODE=1
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 eval "$(pyenv init -)"
@@ -28,6 +32,13 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # AWS CLI completion
 complete -C "${HOME}/.local/bin/aws_completer" aws
 
-source $ZDOTDIR/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+# source zsh plugins
+for plugin in "${ZDOTDIR}"/plugins/*; do
+  name=$(basename "${plugin}")
+  _source="${plugin}/${name}.zsh"
+  [[ -s "${_source} "]] && source "${plugin}/${name}.zsh"
+done
+
+fpath+="${ZDOTDIR}"/plugins/zsh-completions/src
 
 eval "$(starship init zsh)"
