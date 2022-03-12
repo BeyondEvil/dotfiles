@@ -73,6 +73,7 @@ else
 fi
 
 brew tap hashicorp/tap
+brew tap homebrew/cask-fonts
 brew update && brew upgrade
 
 formulae="
@@ -86,6 +87,7 @@ pure
 pyenv
 readline
 shellcheck
+starship
 stern
 sqlite3
 wget
@@ -102,6 +104,7 @@ casks="
 bitwarden
 brave-browser
 docker
+font-hack-nerd-font
 google-chrome
 intellij-idea
 iterm2
@@ -121,9 +124,10 @@ echo "Setting up python env"
 if ! which aws 1>/dev/null; then
   echo "Installing AWS CLI"
   curl -fsSL "https://awscli.amazonaws.com/AWSCLIV2.pkg" -o "AWSCLIV2.pkg"
+  sed -i '' -e "s;%%HOME%%;${HOME}/dev;g" "${DEV}/dotfiles/awscli.xml"
   installer -pkg AWSCLIV2.pkg \
     -target CurrentUserHomeDirectory \
-    -applyChoiceChangesXML $DEV/dotfiles/awscli.xml
+    -applyChoiceChangesXML "${DEV}/dotfiles/awscli.xml"
     ln -s ~/dev/aws-cli/aws ~/.local/bin/aws
     ln -s ~/dev/aws-cli/aws_completer ~/.local/bin/aws_completer
   rm "AWSCLIV2.pkg"

@@ -6,7 +6,7 @@
       <key>choiceAttribute</key>
       <string>customLocation</string>
       <key>attributeSetting</key>
-      <string>/Users/jimbrannlund/dev</string>
+      <string>%%HOME%%</string>
       <key>choiceIdentifier</key>
       <string>default</string>
     </dict>
