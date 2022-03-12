@@ -14,6 +14,8 @@ export DEV=~/dev
 if ! xcode-select -p 1>/dev/null; then
   echo "Installing xcode command line tools"
   xcode-select --install
+else
+  /usr/sbin/softwareupdate --all --install --force
 fi
 
 if ! /usr/bin/pgrep oahd &>/dev/null; then
@@ -72,7 +74,6 @@ else
   popd 1>/dev/null || exit 1
 fi
 
-brew tap hashicorp/tap
 brew tap homebrew/cask-fonts
 brew update && brew upgrade
 
@@ -93,7 +94,6 @@ sqlite3
 wget
 xz
 zlib
-hashicorp/tap/terraform
 "
 
 echo "Installing formulae"

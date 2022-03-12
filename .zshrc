@@ -16,12 +16,13 @@ eval "$(pyenv init -)"
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
+
 # case-insensitivity
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 
 # pure prompt
-fpath+=/opt/homebrew/share/zsh/site-functions
-autoload -U promptinit; promptinit
+# fpath+=/opt/homebrew/share/zsh/site-functions
+# autoload -U promptinit; promptinit
 # prompt pure
 
 # AWS CLI completion
