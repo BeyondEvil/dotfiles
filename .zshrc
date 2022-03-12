@@ -22,7 +22,7 @@ zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 # pure prompt
 fpath+=/opt/homebrew/share/zsh/site-functions
 autoload -U promptinit; promptinit
-prompt pure
+# prompt pure
 
 # AWS CLI completion
 complete -C "${HOME}/.local/bin/aws_completer" aws
