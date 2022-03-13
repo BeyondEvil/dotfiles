@@ -4,9 +4,16 @@ set -eo pipefail
 
 get() {
   local plugin="${1}"
-  local name=$(basename -s .git "${plugin}")
+  local name
+  local install_dir
 
-  local install_dir=$ZDOTDIR/plugins/${name}
+  name=$(basename -s .git "${plugin}")
+  install_dir=${ZDOTDIR}/plugins/${name}
+
+  echo "plugin: ${plugin}"
+  echo "name: ${name}"
+  echo "install dir: ${install_dir}"
+
   if [[ ! -d ${install_dir}/.git ]]; then
     echo "Installing zsh plugin ${name}"
     git clone "${plugin}" "${install_dir}"
