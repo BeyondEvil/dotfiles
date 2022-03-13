@@ -65,9 +65,9 @@ fi
 
 # Install zsh plugins
 IFS=$'\n' read -r -d '' -a plugins << 'END' || :
-'https://github.com/zsh-users/zsh-syntax-highlighting.git'
-'https://github.com/zsh-users/zsh-autosuggestions.git'
-'https://github.com/zsh-users/zsh-completions.git'
+https://github.com/zsh-users/zsh-syntax-highlighting.git
+https://github.com/zsh-users/zsh-autosuggestions.git
+https://github.com/zsh-users/zsh-completions.git
 END
 
 for plugin in "${plugins[@]}"; do
