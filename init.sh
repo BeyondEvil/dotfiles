@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 set -eo pipefail
 
@@ -38,7 +38,6 @@ if ! /usr/bin/pgrep oahd &>/dev/null; then
   /usr/sbin/softwareupdate --install-rosetta --agree-to-license
 fi
 
-
 # clone the dotfiles repo
 if [[ ! -d $DEV/dotfiles/.git ]]; then
   echo "Cloning dotfiles"
@@ -65,10 +64,10 @@ fi
 # zsh -c "nvm install --lts && nvm alias default $(node --version)"
 
 # Install zsh plugins
-IFS=$'\n' read -r -d '' -a plugins << 'END'
-https://github.com/zsh-users/zsh-syntax-highlighting.git
-https://github.com/zsh-users/zsh-autosuggestions.git
-https://github.com/zsh-users/zsh-completions.git
+IFS=$'\n' read -r -d '' -a plugins << 'END' || :
+'https://github.com/zsh-users/zsh-syntax-highlighting.git'
+'https://github.com/zsh-users/zsh-autosuggestions.git'
+'https://github.com/zsh-users/zsh-completions.git'
 END
 
 for plugin in "${plugins[@]}"; do
@@ -78,7 +77,7 @@ done
 brew tap homebrew/cask-fonts
 brew update && brew upgrade
 
-IFS=$'\n' read -r -d '' -a formulae << 'END'
+IFS=$'\n' read -r -d '' -a formulae << 'END' || :
 go
 jq
 jsonnet
@@ -98,9 +97,9 @@ zlib
 END
 
 echo "Installing formulae"
-brew install "${formulae[@]}" 2>/dev/null
+brew install "${formulae[@]}"
 
-IFS=$'\n' read -r -d '' -a casks << 'END'
+IFS=$'\n' read -r -d '' -a casks << 'END' || :
 1password
 bitwarden
 brave-browser
@@ -114,7 +113,7 @@ slack
 END
 
 echo "Installing casks"
-brew install --cask "${casks[@]}" 2>/dev/null
+brew install --cask "${casks[@]}"
 
 echo "Cleaning up"
 brew cleanup
