@@ -38,8 +38,6 @@ if ! /usr/bin/pgrep oahd &>/dev/null; then
   /usr/sbin/softwareupdate --install-rosetta --agree-to-license
 fi
 
-# set the amazing ZDOTDIR variable
-export ZDOTDIR=~/.config/zsh
 
 # clone the dotfiles repo
 if [[ ! -d $DEV/dotfiles/.git ]]; then
@@ -50,20 +48,6 @@ else
   pushd $DEV/dotfiles 1>/dev/null || exit 1
   git pull --ff-only
   popd 1>/dev/null || exit 1
-fi
-
-echo "Copying dotfiles to ZDOTDIR"
-cp $DEV/dotfiles/.z* $ZDOTDIR
-
-echo "Copy starship.toml to config dir"
-cp $DEV/dotfiles/starship.toml ~/.config/
-
-echo "Change the root .zshenv file to use ZDOTDIR"
-if [[ -s ~/.zshenv ]]; then
-cat << 'EOF' >| ~/.zshenv
-export ZDOTDIR=~/.config/zsh
-[[ -f $ZDOTDIR/.zshenv ]] && . $ZDOTDIR/.zshenv
-EOF
 fi
 
 if ! which brew 1>/dev/null; then
@@ -134,6 +118,23 @@ brew install --cask "${casks[@]}" 2>/dev/null
 
 echo "Cleaning up"
 brew cleanup
+
+# set the amazing ZDOTDIR variable
+export ZDOTDIR=~/.config/zsh
+
+echo "Copying dotfiles to ZDOTDIR"
+cp $DEV/dotfiles/.z* $ZDOTDIR
+
+echo "Copy starship.toml to config dir"
+cp $DEV/dotfiles/starship.toml ~/.config/
+
+echo "Change the root .zshenv file to use ZDOTDIR"
+if [[ -s ~/.zshenv ]]; then
+cat << 'EOF' >| ~/.zshenv
+export ZDOTDIR=~/.config/zsh
+[[ -f $ZDOTDIR/.zshenv ]] && . $ZDOTDIR/.zshenv
+EOF
+fi
 
 echo "Setting up python env"
 /bin/zsh -l $DEV/dotfiles/python_env.zsh
