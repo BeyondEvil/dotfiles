@@ -36,7 +36,7 @@ complete -C "${HOME}/.local/bin/aws_completer" aws
 for plugin in "${ZDOTDIR}"/plugins/*; do
   name=$(basename "${plugin}")
   _source="${plugin}/${name}.zsh"
-  [[ -s "${_source} "]] && source "${plugin}/${name}.zsh"
+  [[ -s "${_source}" ]] && source "${plugin}/${name}.zsh"
 done
 
 fpath+="${ZDOTDIR}"/plugins/zsh-completions/src
