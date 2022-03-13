@@ -55,9 +55,10 @@ fi
 echo "Copying dotfiles to ZDOTDIR"
 cp $DEV/dotfiles/.z* $ZDOTDIR
 
+echo "Copy starship.toml to config dir"
 cp $DEV/dotfiles/starship.toml ~/.config/
 
-# change the root .zshenv file to use ZDOTDIR
+echo "Change the root .zshenv file to use ZDOTDIR"
 if [[ -s ~/.zshenv ]]; then
 cat << 'EOF' >| ~/.zshenv
 export ZDOTDIR=~/.config/zsh
