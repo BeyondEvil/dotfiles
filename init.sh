@@ -159,9 +159,6 @@ if ! which aws 1>/dev/null; then
   rm "AWSCLIV2.pkg"
 fi
 
-echo "Install ykman"
-pipx install yubikey-manager
-
 # OSX settings
 source osx.sh
 
