@@ -100,6 +100,7 @@ stern
 sqlite3
 wget
 xz
+ykman
 zlib
 END
 
