@@ -100,6 +100,7 @@ stern
 sqlite3
 wget
 xz
+ykman
 zlib
 END
 
@@ -108,6 +109,7 @@ brew install "${formulae[@]}"
 
 IFS=$'\n' read -r -d '' -a casks << 'END' || :
 1password
+aws-vault
 bitwarden
 brave-browser
 docker
@@ -117,6 +119,7 @@ intellij-idea
 iterm2
 pycharm
 slack
+the-unarchiver
 END
 
 echo "Installing casks"
@@ -156,5 +159,8 @@ if ! which aws 1>/dev/null; then
     ln -s ~/dev/aws-cli/aws_completer ~/.local/bin/aws_completer
   rm "AWSCLIV2.pkg"
 fi
+
+# OSX settings
+source osx.sh
 
 echo "Done"
