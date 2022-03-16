@@ -159,7 +159,7 @@ if ! which aws 1>/dev/null; then
 fi
 
 echo "Install ykman"
-pipx install ykman
+pipx install yubikey-manager
 
 # OSX settings
 source osx.sh
