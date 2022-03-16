@@ -160,6 +160,6 @@ if ! which aws 1>/dev/null; then
 fi
 
 # OSX settings
-source osx.sh
+source $DEV/dotfiles/osx.sh
 
 echo "Done"
