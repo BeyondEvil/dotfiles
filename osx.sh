@@ -8,4 +8,4 @@ defaults write com.apple.dock "wvous-tl-modifier" 0;
 defaults write com.apple.dock "wvous-bl-corner" 4;
 defaults write com.apple.dock "wvous-bl-modifier" 0;
 
-killall Dock
+killall cfprefsd && killall Dock

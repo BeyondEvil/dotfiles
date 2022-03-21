@@ -118,7 +118,7 @@ intellij-idea
 iterm2
 pycharm
 slack
-the-unarchiver
+yubico-yubikey-manager
 END
 
 echo "Installing casks"
@@ -160,6 +160,6 @@ if ! which aws 1>/dev/null; then
 fi
 
 # OSX settings
-source $DEV/dotfiles/osx.sh
+# source $DEV/dotfiles/osx.sh CURRENTLY NOT WORKING
 
 echo "Done"
