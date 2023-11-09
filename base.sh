@@ -94,14 +94,14 @@ for plugin in "${plugins[@]}"; do
 done
 
 echo "Link dotfiles to ZDOTDIR"
-ln -s ${DEV}/dotfiles/.z* ${ZDOTDIR}
+ln -sfn ${DEV}/dotfiles/.z* ${ZDOTDIR}
 
 echo "Link starship.toml to config dir"
-ln -s ${DEV}/dotfiles/starship.toml ~/.config/
+ln -sfn ${DEV}/dotfiles/starship.toml ~/.config/
 
 echo "Link gitfiles to home"
-ln -s ${DEV}/dotfiles/gitconfig ~/.gitconfig
-ln -s ${DEV}/dotfiles/gitignore ~/.gitignore
+ln -sfn ${DEV}/dotfiles/gitconfig ~/.gitconfig
+ln -sfn ${DEV}/dotfiles/gitignore ~/.gitignore
 
 echo "Change the root .zshenv file to use ZDOTDIR"
 if [[ ! -s ~/.zshenv ]]; then
