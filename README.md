@@ -11,3 +11,9 @@ AWS
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/BeyondEvil/dotfiles/master/aws.sh)"
 ```
+
+or
+
+```sh
+${DEV}/dotfiles/aws.sh
+```
