@@ -55,17 +55,6 @@ fi
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
-# Install zsh plugins
-IFS=$'\n' read -r -d '' -a plugins << 'END' || :
-https://github.com/zsh-users/zsh-syntax-highlighting.git
-https://github.com/zsh-users/zsh-autosuggestions.git
-https://github.com/zsh-users/zsh-completions.git
-END
-
-for plugin in "${plugins[@]}"; do
-  get "${plugin}"
-done
-
 if ! brew tap | grep -q "homebrew/cask-fonts"; then
   brew tap homebrew/cask-fonts
 fi
@@ -92,6 +81,17 @@ brew cleanup
 
 # set the amazing ZDOTDIR variable
 export ZDOTDIR=~/.config/zsh
+
+# Install zsh plugins
+IFS=$'\n' read -r -d '' -a plugins << 'END' || :
+https://github.com/zsh-users/zsh-syntax-highlighting.git
+https://github.com/zsh-users/zsh-autosuggestions.git
+https://github.com/zsh-users/zsh-completions.git
+END
+
+for plugin in "${plugins[@]}"; do
+  get "${plugin}"
+done
 
 echo "Link dotfiles to ZDOTDIR"
 ln -s ${DEV}/dotfiles/.z* ${ZDOTDIR}
