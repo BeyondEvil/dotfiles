@@ -39,7 +39,7 @@ if ! xcode-select -p 1>/dev/null; then
   xcode-select --install
 fi
 
-if ! /usr/bin/pgrep oahd &>/dev/null; then
+if ! arch -arch x86_64 uname -m &>/dev/null; then
   echo "Installing Rosetta 2"
   # needed for AWS CLI 2
   /usr/sbin/softwareupdate --install-rosetta --agree-to-license

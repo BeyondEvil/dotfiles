@@ -34,6 +34,10 @@ done
 
 fpath+="${ZDOTDIR}"/plugins/zsh-completions/src
 
+if which aws 1>/dev/null; then
+  complete -C "${HOME}/.local/bin/aws_completer" aws
+fi
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 eval "$(starship init zsh)"

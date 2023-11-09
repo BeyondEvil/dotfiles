@@ -55,6 +55,8 @@ fi
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
+brew analytics off
+
 if ! brew tap | grep -q "homebrew/cask-fonts"; then
   brew tap homebrew/cask-fonts
 fi
