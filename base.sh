@@ -29,6 +29,7 @@ echo "Creating folders"
 mkdir -p ~/dev
 mkdir -p ~/.config/zsh/plugins
 mkdir -p ~/bin
+mkdir -p ~/.local/bin
 
 export DEV=~/dev
 
