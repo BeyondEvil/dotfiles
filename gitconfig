@@ -1,0 +1,7 @@
+[user]
+	name = Jim Brännlund
+	email = jim.brannlund@gmail.com
+[core]
+	excludesFile = ~/.gitignore
+[push]
+	autoSetupRemote = true

@@ -12,25 +12,18 @@ setopt hist_find_no_dups
 
 export LANG=en_US.UTF-8
 export LC_ALL=en_US.UTF-8
-export PYTHONDONTWRITEBYTECODE=1
 
-eval "$(/opt/homebrew/bin/brew shellenv)"
-
-eval "$(pyenv init -)"
+path=(
+  "${HOME}/bin"
+  "${HOME}/.local/bin"
+  $path
+)
 
 autoload bashcompinit && bashcompinit
 autoload -Uz compinit && compinit
 
 # case-insensitivity
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
-
-# pure prompt
-# fpath+=/opt/homebrew/share/zsh/site-functions
-# autoload -U promptinit; promptinit
-# prompt pure
-
-# AWS CLI completion
-complete -C "${HOME}/.local/bin/aws_completer" aws
 
 # source zsh plugins
 for plugin in "${ZDOTDIR}"/plugins/*; do
@@ -40,5 +33,7 @@ for plugin in "${ZDOTDIR}"/plugins/*; do
 done
 
 fpath+="${ZDOTDIR}"/plugins/zsh-completions/src
+
+eval "$(/opt/homebrew/bin/brew shellenv)"
 
 eval "$(starship init zsh)"
