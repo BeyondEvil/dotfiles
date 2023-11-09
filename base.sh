@@ -104,7 +104,7 @@ ln -s ${DEV}/dotfiles/gitconfig ~/.gitconfig
 ln -s ${DEV}/dotfiles/gitignore ~/.gitignore
 
 echo "Change the root .zshenv file to use ZDOTDIR"
-if [[ -s ~/.zshenv ]]; then
+if [[ ! -s ~/.zshenv ]]; then
 cat << 'EOF' >| ~/.zshenv
 export ZDOTDIR=~/.config/zsh
 [[ -f $ZDOTDIR/.zshenv ]] && . $ZDOTDIR/.zshenv
