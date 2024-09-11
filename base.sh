@@ -44,12 +44,15 @@ dotfiles_repo="${DEV}/beyondevil/dotfiles"
 if [[ ! -d "${dotfiles_repo}/.git" ]]; then
   echo "Cloning dotfiles"
   git clone --recursive https://github.com/BeyondEvil/dotfiles.git "${dotfiles_repo}"
+  # change remote to SSH
+  pushd "${dotfiles_repo}" 1>/dev/null || exit 1
+  git remote set-url origin git@github.com:BeyondEvil/dotfiles.git
 else
   echo "Updating dotfiles"
   pushd "${dotfiles_repo}" 1>/dev/null || exit 1
   git pull --ff-only
-  popd 1>/dev/null || exit 1
 fi
+popd 1>/dev/null || exit 1
 
 if ! /opt/homebrew/bin/brew --version 1>/dev/null; then
   echo "Installing Homebrew"
@@ -77,6 +80,7 @@ brew install "${formulae[@]}"
 
 IFS=$'\n' read -r -d '' -a casks << 'END' || :
 iterm2
+visual-studio-code
 END
 
 echo "Installing casks"
