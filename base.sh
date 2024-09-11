@@ -60,14 +60,15 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 brew analytics off
 
-if ! brew tap | grep -q "homebrew/cask-fonts"; then
-  brew tap homebrew/cask-fonts
-fi
+#if ! brew tap | grep -q "homebrew/cask-fonts"; then
+#  brew tap homebrew/cask-fonts
+#fi
 brew update && brew upgrade
 
 IFS=$'\n' read -r -d '' -a formulae << 'END' || :
 fzf
 jq
+font-hack-nerd-font
 starship
 END
 
@@ -75,7 +76,6 @@ echo "Installing formulae"
 brew install "${formulae[@]}"
 
 IFS=$'\n' read -r -d '' -a casks << 'END' || :
-font-hack-nerd-font
 iterm2
 END
 
