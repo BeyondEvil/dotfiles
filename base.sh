@@ -26,32 +26,34 @@ get() {
 }
 
 echo "Creating folders"
-mkdir -p ~/dev
+mkdir -p ~/dev/beyondevil
 mkdir -p ~/.config/zsh/plugins
 mkdir -p ~/bin
 mkdir -p ~/.local/bin
 
 export DEV=~/dev
 
-if ! xcode-select -p 1>/dev/null; then
-  echo "Installing xcode command line tools"
-  xcode-select --install
-fi
+# installed by brew
+#if ! xcode-select -p 1>/dev/null; then
+#  echo "Installing xcode command line tools"
+#  xcode-select --install
+#fi
 
 # clone the dotfiles repo
-if [[ ! -d ${DEV}/dotfiles/.git ]]; then
+dotfiles_repo="${DEV}/beyondevil/dotfiles"
+if [[ ! -d "${dotfiles_repo}/.git" ]]; then
   echo "Cloning dotfiles"
-  git clone --recursive https://github.com/BeyondEvil/dotfiles.git ${DEV}/dotfiles
+  git clone --recursive https://github.com/BeyondEvil/dotfiles.git "${dotfiles_repo}"
 else
   echo "Updating dotfiles"
-  pushd ${DEV}/dotfiles 1>/dev/null || exit 1
+  pushd "${dotfiles_repo}" 1>/dev/null || exit 1
   git pull --ff-only
   popd 1>/dev/null || exit 1
 fi
 
-if ! which brew 1>/dev/null; then
+if ! /opt/homebrew/bin/brew --version 1>/dev/null; then
   echo "Installing Homebrew"
-  echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)"
+  echo | /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 fi
 
 eval "$(/opt/homebrew/bin/brew shellenv)"
@@ -64,20 +66,21 @@ fi
 brew update && brew upgrade
 
 IFS=$'\n' read -r -d '' -a formulae << 'END' || :
+fzf
+jq
 starship
 END
 
 echo "Installing formulae"
-# brew install "${formulae[@]}"
+brew install "${formulae[@]}"
 
 IFS=$'\n' read -r -d '' -a casks << 'END' || :
-brave-browser
 font-hack-nerd-font
 iterm2
 END
 
 echo "Installing casks"
-# brew install --cask "${casks[@]}"
+brew install --cask "${casks[@]}"
 
 echo "Cleaning up"
 brew cleanup
@@ -97,14 +100,18 @@ for plugin in "${plugins[@]}"; do
 done
 
 echo "Link dotfiles to ZDOTDIR"
-ln -sfn ${DEV}/dotfiles/.z* ${ZDOTDIR}
+ln -sfn ${dotfiles_repo}/.z* ${ZDOTDIR}
 
 echo "Link starship.toml to config dir"
-ln -sfn ${DEV}/dotfiles/starship.toml ~/.config/
+ln -sfn ${dotfiles_repo}/starship.toml ~/.config/
 
 echo "Link gitfiles to home"
-ln -sfn ${DEV}/dotfiles/gitconfig ~/.gitconfig
-ln -sfn ${DEV}/dotfiles/gitignore ~/.gitignore
+# giconfig we copy because we make changes we don't want to track
+cp ${dotfiles_repo}/gitconfig ~/.gitconfig
+ln -sfn ${dotfiles_repo}/gitignore ~/.gitignore
+
+read -p "git committer email: " committer_email
+git config --global user.email "${committer_email}"
 
 echo "Change the root .zshenv file to use ZDOTDIR"
 if [[ ! -s ~/.zshenv ]]; then

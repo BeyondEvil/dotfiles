@@ -1,6 +1,6 @@
 [user]
 	name = Jim Brännlund
-	email = jim.brannlund@scania.com
+	email = jim.brannlund@gmail.com
 [core]
 	excludesFile = ~/.gitignore
 [push]
