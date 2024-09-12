@@ -2,6 +2,8 @@
 
 set -eo pipefail
 
+confirmation_regex='^[yY](es)?$'
+
 get() {
   local plugin="${1}"
   local name
@@ -63,14 +65,12 @@ eval "$(/opt/homebrew/bin/brew shellenv)"
 
 brew analytics off
 
-#if ! brew tap | grep -q "homebrew/cask-fonts"; then
-#  brew tap homebrew/cask-fonts
-#fi
 brew update && brew upgrade
 
 IFS=$'\n' read -r -d '' -a formulae << 'END' || :
 fzf
 jq
+gh
 font-hack-nerd-font
 starship
 END
@@ -85,6 +85,19 @@ END
 
 echo "Installing casks"
 brew install --cask "${casks[@]}"
+
+read -rp "Do you want to install AWS tooling? [y/N]: " install_aws
+read -rp "Do you want to install Kubernetes tooling? [y/N]: " install_k8s
+
+if [[ "${install_aws}" =~ ${confirmation_regex} ]]; then
+  echo "Installing AWS tooling..."
+  source "${dotfiles_repo}/aws.sh"
+fi
+
+if [[ "${install_k8s}" =~ ${confirmation_regex} ]]; then
+  echo "Installing Kubernetes tooling..."
+  source "${dotfiles_repo}/k8s.sh"
+fi
 
 echo "Cleaning up"
 brew cleanup
@@ -109,13 +122,16 @@ ln -sfn ${dotfiles_repo}/.z* ${ZDOTDIR}
 echo "Link starship.toml to config dir"
 ln -sfn ${dotfiles_repo}/starship.toml ~/.config/
 
-echo "Link gitfiles to home"
-# giconfig we copy because we make changes we don't want to track
-cp ${dotfiles_repo}/gitconfig ~/.gitconfig
+echo "Link gitignore to home"
 ln -sfn ${dotfiles_repo}/gitignore ~/.gitignore
 
-read -p "git committer email: " committer_email
-git config --global user.email "${committer_email}"
+if ! grep "email" ~/.gitconfig &> /dev/null; then
+  echo "Copy gitconfig to home"
+  # gitconfig we copy because we make changes we don't want to track
+  cp ${dotfiles_repo}/gitconfig ~/.gitconfig
+  read -rp "git committer email: " committer_email
+  git config --global user.email "${committer_email}"
+fi
 
 echo "Change the root .zshenv file to use ZDOTDIR"
 if [[ ! -s ~/.zshenv ]]; then

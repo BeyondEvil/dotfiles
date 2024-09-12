@@ -38,6 +38,10 @@ if which aws 1>/dev/null; then
   complete -C "${HOME}/.local/bin/aws_completer" aws
 fi
 
+alias ls="ls -la"
+
+export PIP_REQUIRE_VIRTUALENV=true
+
 eval "$(/opt/homebrew/bin/brew shellenv)"
 
 eval "$(starship init zsh)"
