@@ -21,4 +21,4 @@ if ! which aws 1>/dev/null; then
 fi
 
 brew install --cask aws-vault
-brew install ykman
+brew install ykman tfenv
