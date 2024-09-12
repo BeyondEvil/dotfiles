@@ -2,7 +2,7 @@
 
 set -eo pipefail
 
-dofiles_repo="${1}"
+dotfiles_repo="${1}"
 
 if ! arch -arch x86_64 uname -m &>/dev/null; then
   echo "Installing Rosetta 2"
