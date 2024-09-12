@@ -91,7 +91,7 @@ read -rp "Do you want to install Kubernetes tooling? [y/N]: " install_k8s
 
 if [[ "${install_aws}" =~ ${confirmation_regex} ]]; then
   echo "Installing AWS tooling..."
-  source "${dotfiles_repo}/aws.sh"
+  source "${dotfiles_repo}/aws.sh" "${dotfiles_repo}"
 fi
 
 if [[ "${install_k8s}" =~ ${confirmation_regex} ]]; then
